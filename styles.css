@@ -1,0 +1,495 @@
+:root {
+  --ink: #1e2430;
+  --muted: #657184;
+  --paper: #fff8e8;
+  --panel: #fffdf4;
+  --lime: #9dd56b;
+  --mint: #67d3a0;
+  --teal: #2fb6ad;
+  --brick: #e76f51;
+  --gold: #f7c948;
+  --sky: #8fd3ff;
+  --night: #26364f;
+  --shadow: 0 16px 36px rgba(30, 36, 48, 0.16);
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.24) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(135deg, #ffcf70 0%, #9be7c3 42%, #7db8ff 100%);
+  background-size: 32px 32px, 32px 32px, 100% 100%;
+}
+
+button {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.game-shell {
+  width: min(1180px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+.topbar,
+.city-grid,
+.detective-board,
+.message-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.topbar {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.eyebrow,
+.panel-label {
+  margin: 0 0 4px;
+  color: #425064;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+  line-height: 1.05;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 4.2rem);
+  text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.65);
+}
+
+h2 {
+  font-size: clamp(1.25rem, 2vw, 2rem);
+}
+
+.stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.stat,
+.district-panel,
+.scene-panel,
+.clue-panel,
+.suspect-panel,
+.message-panel {
+  border: 4px solid rgba(30, 36, 48, 0.86);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow), inset 0 -5px 0 rgba(30, 36, 48, 0.08);
+}
+
+.stat {
+  min-width: 86px;
+  padding: 10px 14px;
+  text-align: center;
+}
+
+.stat span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.stat strong {
+  display: block;
+  font-size: 1.75rem;
+}
+
+.timer-stat strong.low {
+  color: #c92a2a;
+  animation: pulse 0.8s infinite;
+}
+
+.city-grid {
+  grid-template-columns: 260px 1fr;
+  margin-bottom: 18px;
+}
+
+.district-panel,
+.clue-panel,
+.suspect-panel {
+  padding: 18px;
+}
+
+.district-buttons {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 16px;
+}
+
+.district-button,
+.primary-action,
+.secondary-action {
+  min-height: 44px;
+  border: 3px solid var(--ink);
+  border-radius: 7px;
+  color: var(--ink);
+  font-weight: 900;
+  box-shadow: inset 0 -4px 0 rgba(30, 36, 48, 0.18);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.district-button {
+  padding: 10px 12px;
+  background: #fff2b8;
+  text-align: left;
+}
+
+.district-button.active {
+  background: var(--gold);
+  transform: translateX(5px);
+}
+
+.primary-action,
+.secondary-action {
+  width: 100%;
+  background: var(--brick);
+  color: white;
+}
+
+.secondary-action {
+  margin-top: 14px;
+  background: var(--teal);
+}
+
+.district-button:hover,
+.primary-action:hover,
+.secondary-action:hover,
+.suspect-card:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.1);
+}
+
+.scene-panel {
+  position: relative;
+  min-height: 370px;
+  overflow: hidden;
+  background: linear-gradient(var(--sky), #dff7ff 58%, #79bc62 58%);
+}
+
+.scene-panel.night {
+  background: linear-gradient(var(--night), #405578 58%, #496b48 58%);
+}
+
+.scene-sky {
+  position: absolute;
+  inset: 0 0 42%;
+  overflow: hidden;
+}
+
+.sun {
+  position: absolute;
+  top: 22px;
+  right: 46px;
+  width: 62px;
+  height: 62px;
+  border: 4px solid var(--ink);
+  background: var(--gold);
+  box-shadow: 0 0 0 9px rgba(247, 201, 72, 0.3);
+}
+
+.night .sun {
+  background: #f5f3ce;
+  box-shadow: 0 0 0 9px rgba(245, 243, 206, 0.22);
+}
+
+.cloud {
+  position: absolute;
+  width: 116px;
+  height: 35px;
+  border: 4px solid rgba(30, 36, 48, 0.8);
+  background: white;
+  animation: float 13s linear infinite;
+}
+
+.cloud-one {
+  top: 42px;
+  left: -130px;
+}
+
+.cloud-two {
+  top: 92px;
+  left: 30%;
+  animation-duration: 17s;
+}
+
+.city-scene {
+  position: absolute;
+  inset: 100px 20px 72px;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.building {
+  position: relative;
+  flex: 1;
+  min-width: 40px;
+  border: 4px solid var(--ink);
+  background: var(--building-color);
+  box-shadow: inset -8px 0 0 rgba(30, 36, 48, 0.12);
+}
+
+.building::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.72) 40%, transparent 40%);
+  background-size: 24px 22px;
+}
+
+.street {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  border-top: 4px solid var(--ink);
+  background:
+    linear-gradient(90deg, transparent 0 42px, #ffd166 42px 86px, transparent 86px 128px),
+    #4f5966;
+  background-size: 128px 100%;
+}
+
+.case-strip {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: end;
+  color: white;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.case-badge {
+  flex: 0 0 auto;
+  border: 3px solid var(--ink);
+  border-radius: 7px;
+  padding: 10px 12px;
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 900;
+  text-shadow: none;
+}
+
+.detective-board {
+  grid-template-columns: 0.8fr 1.2fr;
+}
+
+.board-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.icon-block {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 4px solid var(--ink);
+  background: var(--gold);
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.clues {
+  display: grid;
+  gap: 10px;
+}
+
+.clue {
+  border: 3px solid var(--ink);
+  border-radius: 7px;
+  padding: 12px;
+  background: #ecfff4;
+  font-weight: 800;
+}
+
+.suspects {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.suspect-card {
+  min-height: 220px;
+  border: 4px solid var(--ink);
+  border-radius: 8px;
+  padding: 12px;
+  background: #ffffff;
+  box-shadow: inset 0 -5px 0 rgba(30, 36, 48, 0.1);
+  text-align: left;
+  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.2s ease;
+}
+
+.suspect-card:disabled {
+  cursor: default;
+  opacity: 0.72;
+}
+
+.suspect-avatar {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1.15;
+  place-items: center;
+  border: 4px solid var(--ink);
+  background:
+    linear-gradient(var(--hat-color) 0 23%, transparent 23%),
+    linear-gradient(#f8c79a 0 58%, var(--shirt-color) 58%);
+  image-rendering: pixelated;
+  margin-bottom: 10px;
+  font-size: 3rem;
+}
+
+.suspect-card h3 {
+  margin: 0 0 6px;
+  font-size: 1.08rem;
+}
+
+.trait-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.trait {
+  border: 2px solid var(--ink);
+  border-radius: 5px;
+  padding: 4px 6px;
+  background: #f6f1ff;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.message-panel {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 18px;
+  padding: 14px 18px;
+  background: #fff5c8;
+}
+
+.message-panel.correct {
+  background: #d9ffe6;
+}
+
+.message-panel.wrong {
+  background: #ffe0dc;
+}
+
+.confetti {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--ink);
+  background: var(--piece-color);
+  animation: drop 1.2s ease-in forwards;
+}
+
+@keyframes float {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw + 180px));
+  }
+}
+
+@keyframes drop {
+  to {
+    transform: translateY(105vh) rotate(620deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+@media (max-width: 860px) {
+  .topbar,
+  .city-grid,
+  .detective-board {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    justify-content: stretch;
+  }
+
+  .stat {
+    flex: 1;
+  }
+
+  .district-buttons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .suspects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scene-panel {
+    min-height: 330px;
+  }
+}
+
+@media (max-width: 520px) {
+  .game-shell {
+    width: min(100% - 18px, 1180px);
+    padding-top: 14px;
+  }
+
+  .district-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .case-strip,
+  .message-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .suspects {
+    grid-template-columns: 1fr;
+  }
+}

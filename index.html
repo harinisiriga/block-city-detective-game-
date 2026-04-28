@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Block City Detective</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="topbar" aria-label="Game status">
+        <div>
+          <p class="eyebrow">Case board</p>
+          <h1>Block City Detective</h1>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <span>Score</span>
+            <strong id="score">0</strong>
+          </div>
+          <div class="stat">
+            <span>Streak</span>
+            <strong id="streak">0</strong>
+          </div>
+          <div class="stat timer-stat">
+            <span>Time</span>
+            <strong id="timer">45</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="city-grid">
+        <aside class="district-panel">
+          <p class="panel-label">City map</p>
+          <div id="districtButtons" class="district-buttons"></div>
+          <button id="newGameBtn" class="primary-action" type="button">New case run</button>
+        </aside>
+
+        <section class="scene-panel" aria-live="polite">
+          <div class="scene-sky">
+            <div class="sun" aria-hidden="true"></div>
+            <div class="cloud cloud-one" aria-hidden="true"></div>
+            <div class="cloud cloud-two" aria-hidden="true"></div>
+          </div>
+          <div id="cityScene" class="city-scene"></div>
+          <div class="case-strip">
+            <div>
+              <p class="panel-label">Current location</p>
+              <h2 id="locationName">Downtown Market</h2>
+            </div>
+            <div id="caseBadge" class="case-badge">Case 1 / 5</div>
+          </div>
+        </section>
+      </section>
+
+      <section class="detective-board">
+        <section class="clue-panel">
+          <div class="board-title">
+            <span class="icon-block">?</span>
+            <div>
+              <p class="panel-label">Clues found</p>
+              <h2>Read the scene</h2>
+            </div>
+          </div>
+          <div id="clues" class="clues"></div>
+          <button id="hintBtn" class="secondary-action" type="button">Reveal tiny hint</button>
+        </section>
+
+        <section class="suspect-panel">
+          <div class="board-title">
+            <span class="icon-block">!</span>
+            <div>
+              <p class="panel-label">Suspects</p>
+              <h2>Pick the criminal</h2>
+            </div>
+          </div>
+          <div id="suspects" class="suspects"></div>
+        </section>
+      </section>
+
+      <section id="messagePanel" class="message-panel">
+        <strong>Welcome, detective.</strong>
+        <span>Choose the suspect that best matches the blocky city clues.</span>
+      </section>
+    </main>
+
+    <div id="confetti" class="confetti" aria-hidden="true"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
