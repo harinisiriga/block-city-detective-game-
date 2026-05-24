@@ -26,10 +26,6 @@ A simple blocky 2D detective game where the player explores different places in 
 - `styles.css` - Game styling and layout
 - `script.js` - Game logic
 
-## Deployment
-
-This game can be deployed with GitHub Pages because it uses only HTML, CSS, and JavaScript.
-
 ## Author
 
 Created by Harini.
